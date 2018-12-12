@@ -31,6 +31,18 @@ Vue.use(VueProgressBar, {
     height: '3px'
 })
 
+//importing sweatalert notification
+import swal from 'sweetalert2'
+window.swal = swal;
+//and used it
+const toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+window.toast = toast;
+
 //adding vue component
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue') },
@@ -54,6 +66,8 @@ Vue.filter('myDate', function (date) {
     return moment(date).format('MMMM Do YYYY');
 });
 
+//create custom even for http request
+window.Fire = new Vue();
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

@@ -28,7 +28,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|string|max:191',
+            'name' => 'required|string|max:191|unique:users',
             'email' => 'required|string|email|max:191|unique:users',
             'password' => 'required|string|min:6'
         ]);
@@ -74,6 +74,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::FindOrFail($id);
+
+        //delete the user
+        $user->delete();
+        //the message log
+        return ['message' => 'user deleted'];
     }
 }

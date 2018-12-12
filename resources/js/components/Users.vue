@@ -32,8 +32,10 @@
                   <td>{{user.type | Uptext}}</td>
                   <td>{{user.created_at | myDate}}</td>
                   <td>
-                    <a href>
+                    <a href="#">
                       <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="#" @click="deleteUser(user.id)">
                       <i class="fa fa-trash red"></i>
                     </a>
                   </td>
@@ -155,17 +157,60 @@ export default {
     };
   },
   methods: {
+    deleteUser(id) {
+      swal({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        //send request to the server
+        if (result.value) {
+          this.form
+            .delete("api/user/" + id)
+            .then(() => {
+              swal("Deleted!", "Your file has been deleted.", "success");
+              Fire.$emit("AfterCreated");
+            })
+            .catch(() => {
+              swal("Fail!", "Something Wrong", "warning");
+            });
+        }
+      });
+    },
     loadUser() {
       axios.get("api/user").then(({ data }) => (this.users = data.data));
     },
     createUser() {
-      this.$Progress.start();
-      this.form.post("api/user");
-      this.$Progress.finish();
+      this.form
+        .post("api/user")
+        .then(() => {
+          this.$Progress.start();
+          Fire.$emit("AfterCreated");
+          $("#addNew").modal("hide");
+          toast({
+            type: "success",
+            title: "User created successfully"
+          });
+          this.$Progress.finish();
+        })
+        .catch(() => {
+          toast({
+            type: "error",
+            title: "Something wrong"
+          });
+        });
     }
   },
   created() {
     this.loadUser();
+    Fire.$on("AfterCreated", () => {
+      this.loadUser();
+    });
+    //setInterval(() =>  this.loadUser(), 3000);
     //console.log("Component mounted.");
   }
 };
