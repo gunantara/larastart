@@ -83,10 +83,10 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <router-link to="/users" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>User Management</p>
-                </a>
+                </router-link>
               </li>
             </ul>
           </li>
