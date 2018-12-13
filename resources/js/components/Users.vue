@@ -32,12 +32,16 @@
                   <td>{{user.type | Uptext}}</td>
                   <td>{{user.created_at | myDate}}</td>
                   <td>
-                    <a href="#" @click="editModal(user)">
+                    <button type="button" class="btn btn-primary btn-sm" @click="editModal(user)">
                       <i class="fa fa-edit"></i>
-                    </a>
-                    <a href="#" @click="deleteUser(user.id)">
-                      <i class="fa fa-trash red"></i>
-                    </a>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-sm"
+                      @click="deleteUser(user.id)"
+                    >
+                      <i class="fa fa-trash"></i>
+                    </button>
                   </td>
                 </tr>
               </tbody>
