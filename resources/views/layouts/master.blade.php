@@ -75,20 +75,28 @@
 
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link ">
-              <i class="nav-icon fas fa-cog"></i>
+              <i class="nav-icon fas fa-cog green"></i>
               <p>
                 Management
-                <i class="right fa fa-angle-left"></i>
+                <i class="right fa fa-angle-left "></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <router-link to="/users" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
-                  <p>User Management</p>
+                  <p>Users</p>
                 </router-link>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <router-link to="/developer" class="nav-link">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>
+                Developer 
+              </p>
+            </router-link>
           </li>
           <li class="nav-item">
             <router-link to="/profile" class="nav-link">
