@@ -246,6 +246,12 @@
                     </div>
                   </div>
                   <div class="form-group">
+                    <label for="photo" class="col-sm-2 control-label">Profile Photo</label>
+                    <div class="col-sm-12">
+                      <input type="file" @change="updateProfile" name="photo" class="form-input">
+                    </div>
+                  </div>
+                  <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-12">
                       <div class="checkbox">
                         <label>
@@ -257,7 +263,11 @@
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-12">
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                      <button
+                        @click.prevent="UpdateInfo"
+                        type="submit"
+                        class="btn btn-success"
+                      >Update</button>
                     </div>
                   </div>
                 </form>
@@ -287,6 +297,23 @@ export default {
         photo: ""
       })
     };
+  },
+  methods: {
+    UpdateInfo() {
+      this.form
+        .put("api/profile ")
+        .then(() => {})
+        .catch(() => {});
+    },
+    updateProfile(e) {
+      let file = e.target.files[0];
+      let reader = new FileReader();
+      reader.onloadend = file => {
+        //console.log("RESULT", reader.result);
+        this.form.photo = reader.result;
+      };
+      console.log(reader.readAsDataURL(file));
+    }
   },
   mounted() {
     console.log("Component mounted.");
