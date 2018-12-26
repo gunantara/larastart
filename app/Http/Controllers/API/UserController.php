@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
+
 class UserController extends Controller
 {
     /**
@@ -15,10 +16,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    
     public function __construct()
     {
         $this->middleware('auth:api');
     } 
+
     public function index()
     {
         return User::latest()->paginate(10); 
@@ -44,7 +47,7 @@ class UserController extends Controller
             'type' => $request['type'],
             'bio' => $request['bio'],
             'photo' => $request['photo'],
-            'password' => Hash::make($request['name'])
+            'password' => Hash::make($request['password'])
         ]);
     }
 
@@ -88,7 +91,7 @@ class UserController extends Controller
         $this->validate($request,[
             'name' => 'required|string|max:191|unique:users,name,'.$user->id,
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
-            'password' => 'sometimes|string|min:6'
+            'password' => 'sometimes|required|string|min:6'
         ]);
         $user->update($request->all());
         return ['message' => 'user updated'];
