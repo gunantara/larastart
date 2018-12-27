@@ -77,7 +77,7 @@
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-cog green"></i>
               <p>
-                Management
+                 User Management
                 <i class="right fa fa-angle-left "></i>
               </p>
             </a>
@@ -86,6 +86,23 @@
                 <router-link to="/users" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Users</p>
+                </router-link>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fab fa-pied-piper"></i>
+              <p>
+                Quiz 
+                <i class="right fa fa-angle-left "></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/addQuiz" class="nav-link">
+                  <i class="fab fa-pied-piper-hat"></i>
+                  <p>Add Quiz</p>
                 </router-link>
               </li>
             </ul>

@@ -93,6 +93,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
             'password' => 'sometimes|required|string|min:6'
         ]);
+        $request->merge(['password' => Hash::make($request['password'])]);
         $user->update($request->all());
         return ['message' => 'user updated'];
     }

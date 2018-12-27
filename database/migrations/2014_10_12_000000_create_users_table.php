@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('photo')->default('profile.png');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes()->index();
         });
     }
 
