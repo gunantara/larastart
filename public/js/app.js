@@ -72339,7 +72339,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       axios.get("api/user").then(function (_ref) {
         var data = _ref.data;
-        return _this3.users = data.data;
+        return _this3.users = data;
       });
     },
     createUser: function createUser() {
@@ -72697,10 +72697,6 @@ var render = function() {
                           [
                             _c("option", { attrs: { value: "" } }, [
                               _vm._v("Select User Role")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "admin" } }, [
-                              _vm._v("Admin")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "user" } }, [

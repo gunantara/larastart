@@ -17,7 +17,7 @@ class CreateQuestionsOptionsTable extends Migration {
 			$table->increments('id');
 			$table->integer('question_id')->unsigned()->nullable()->index('fk_257_question_question_id_questions_option');
 			$table->string('option', 191)->nullable();
-			$table->integer('value')->nullable();
+			$table->tinyInteger('value')->nullable();
 			$table->timestamps();
 			$table->softDeletes()->index();
 		});

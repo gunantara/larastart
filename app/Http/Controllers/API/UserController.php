@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -24,7 +25,8 @@ class UserController extends Controller
 
     public function index()
     {
-        return User::latest()->paginate(10); 
+        return User::where('type', 'user')->get();
+        //return User::latest()->paginate(10); 
     }
 
     /**

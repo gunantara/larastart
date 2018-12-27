@@ -114,7 +114,7 @@
                   :class="{ 'is-invalid': form.errors.has('type') }"
                 >
                   <option value>Select User Role</option>
-                  <option value="admin">Admin</option>
+                  <!--<option value="admin">Admin</option>-->
                   <option value="user">Standard User</option>
                   <option value="author">Author</option>
                 </select>
@@ -216,7 +216,7 @@ export default {
       });
     },
     loadUser() {
-      axios.get("api/user").then(({ data }) => (this.users = data.data));
+      axios.get("api/user").then(({ data }) => (this.users = data));
     },
     createUser() {
       this.$Progress.start();
