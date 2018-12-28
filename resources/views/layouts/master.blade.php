@@ -44,7 +44,7 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="./img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
+        style="opacity: .8">
       <span class="brand-text font-weight-light">SKKNI</span>
     </a>
 
@@ -56,7 +56,10 @@
           <img src="./img/profile.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="#" class="d-block">
+              {{Auth::user()->name}}
+              <p>{{Auth::user()->type}}</p>
+          </a>
         </div>
       </div>
 
@@ -64,7 +67,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-           <li class="nav-item">
+          <li class="nav-item">
             <router-link to="/dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt blue"></i>
               <p>
@@ -72,12 +75,12 @@
               </p>
             </router-link> 
           </li>
-
+          @can('isAdmin')
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-cog green"></i>
               <p>
-                 User Management
+                User Management
                 <i class="right fa fa-angle-left "></i>
               </p>
             </a>
@@ -115,6 +118,7 @@
               </p>
             </router-link>
           </li>
+          @endcan
           <li class="nav-item">
             <router-link to="/profile" class="nav-link">
               <i class="nav-icon fas fa-user yellow"></i>
@@ -157,8 +161,6 @@
   </div>
   <!-- /.content-wrapper -->
 
- 
-
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
@@ -172,7 +174,11 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
+@auth
+<script>
+    window.user = @json(auth()->user())
+</script>
+@endauth
 <script src="/js/app.js"></script>
 
 </body>

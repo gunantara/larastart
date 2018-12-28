@@ -25,6 +25,9 @@ class UserController extends Controller
 
     public function index()
     {
+        $this->authorize('isAdmin');
+        
+        //Filtering for user type
         return User::where('type', 'user')->get();
         //return User::latest()->paginate(10); 
     }
@@ -51,6 +54,7 @@ class UserController extends Controller
             'photo' => $request['photo'],
             'password' => Hash::make($request['password'])
         ]);
+        return ['message' => 'user created'];
     }
 
     public function UpdateProfile(Request $request )

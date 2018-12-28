@@ -15,6 +15,10 @@ window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
+//importing the Gate of User Access
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
+
 //importing vue Router globally for webroute
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
@@ -49,6 +53,7 @@ let routes = [
     { path: '/developer', component: require('./components/Developer.vue') },
     { path: '/profile', component: require('./components/Profile.vue') },
     { path: '/users', component: require('./components/Users.vue') }
+    //{ path: '*', component: require('./components/NotFound.vue') }
 ]
 
 //route any path in web with history in laravel
@@ -96,6 +101,11 @@ Vue.component(
 Vue.component(
     'passport-personal-access-tokens',
     require('./components/passport/PersonalAccessTokens.vue')
+);
+
+Vue.component(
+    'not-found',
+    require('./components/NotFound.vue')
 );
 
 
