@@ -52,7 +52,8 @@ let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue') },
     { path: '/developer', component: require('./components/Developer.vue') },
     { path: '/profile', component: require('./components/Profile.vue') },
-    { path: '/users', component: require('./components/Users.vue') }
+    { path: '/users', component: require('./components/Users.vue') },
+    { path: '/topic', component: require('./components/Topics.vue') }
     //{ path: '*', component: require('./components/NotFound.vue') }
 ]
 
@@ -107,8 +108,6 @@ Vue.component(
     'not-found',
     require('./components/NotFound.vue')
 );
-
-
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 

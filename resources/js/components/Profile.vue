@@ -113,7 +113,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                    <label for="inputExperience" class="col-sm-2 control-label">Biography</label>
 
                     <div class="col-sm-12">
                       <textarea
@@ -134,11 +134,7 @@
                   </div>
 
                   <div class="form-group">
-                    <label
-                      for="password"
-                      class="col-sm-12 control-label"
-                    >Passport (leave empty if not changing)</label>
-
+                    <label for="password" class="col-sm-12 control-label">Password</label>
                     <div class="col-sm-12">
                       <input
                         type="password"
@@ -204,6 +200,7 @@ export default {
           : "img/profile/" + this.form.photo;
       return photo;
     },
+
     updateInfo() {
       this.$Progress.start();
       if (this.form.password == "") {
@@ -219,6 +216,7 @@ export default {
           this.$Progress.fail();
         });
     },
+
     updateProfile(e) {
       let file = e.target.files[0];
       let reader = new FileReader();
