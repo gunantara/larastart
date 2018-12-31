@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //api resource for retrieving data
 Route::apiResource('user', 'API\UserController');
 Route::apiResource('topic', 'API\TopicController');
+Route::apiResource('question', 'API\QuestionController');
 
 Route::get('profile','API\UserController@profile');
 Route::put('profile','API\UserController@UpdateProfile');

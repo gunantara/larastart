@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Topic;
+use App\Question;
+use App\QuestionsOption;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 
-class TopicController extends Controller
+class QuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,10 +23,7 @@ class TopicController extends Controller
 
     public function index()
     {
-        $this->authorize('isAdmin');
-
-        //return all data in table topics
-        return $topics = Topic::all();
+        return $questions = Question::all();
     }
 
     /**
@@ -46,14 +44,8 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'title' => 'required|string|max:191|unique:topics',
-        ]);
-
-        return Topic::create([
-            'title' => $request['title'],
-        ]);
-        return ['message' => 'topic created'];
+        //
+        
     }
 
     /**
@@ -64,7 +56,11 @@ class TopicController extends Controller
      */
     public function show($id)
     {
-        //
+        $relations = [
+            'topics' => \App\Topic::get()->pluck('title', 'id')->prepend('Please select', ''),
+        ];
+
+        return $question = Question::findOrFail($id);
     }
 
     /**
@@ -87,13 +83,7 @@ class TopicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $topic = Topic::FindOrFail($id);
-
-        $this->validate($request,[
-            'title' => 'required|string|max:191|unique:topics,title,'.$topic->id,
-        ]);
-        $topic->update($request->all());
-        return ['message' => 'topic updated'];
+        //
     }
 
     /**
@@ -104,11 +94,6 @@ class TopicController extends Controller
      */
     public function destroy($id)
     {
-        $topic = Topic::FindOrFail($id);
-
-        //delete the user
-        $topic->delete();
-        //the message log
-        return ['message' => 'topic deleted'];
+        //
     }
 }

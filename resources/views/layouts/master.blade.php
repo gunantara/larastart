@@ -103,9 +103,17 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link to="/addQuiz" class="nav-link">
+                <router-link to="/topic" class="nav-link">
                   <i class="fab fa-pied-piper-hat"></i>
-                  <p>Add Quiz</p>
+                  <p>Add Topics</p>
+                </router-link>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/question" class="nav-link">
+                  <i class="fab fa-pied-piper-hat"></i>
+                  <p>Question</p>
                 </router-link>
               </li>
             </ul>

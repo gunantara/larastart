@@ -46,3 +46,4 @@ class Question extends Model
         return $this->hasMany(QuestionsOption::class, 'question_id')->withTrashed();
     }
 }
+
