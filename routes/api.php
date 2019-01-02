@@ -23,5 +23,6 @@ Route::apiResource('user', 'API\UserController');
 Route::apiResource('topic', 'API\TopicController');
 Route::apiResource('question', 'API\QuestionController');
 
+//api for user profile
 Route::get('profile','API\UserController@profile');
 Route::put('profile','API\UserController@UpdateProfile');

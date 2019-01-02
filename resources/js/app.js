@@ -49,6 +49,7 @@ window.toast = toast;
 
 //adding vue component
 let routes = [
+    { path: '/home', component: require('./components/Dashboard.vue') },
     { path: '/dashboard', component: require('./components/Dashboard.vue') },
     { path: '/developer', component: require('./components/Developer.vue') },
     { path: '/profile', component: require('./components/Profile.vue') },

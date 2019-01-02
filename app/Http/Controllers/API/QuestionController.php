@@ -33,7 +33,17 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        $relations = [
+            'topics' => \App\Topic::get()->pluck('title', 'id')->prepend('Please select', ''),
+        ];
+
+        $correct_options = [
+            'option1' => 'Option #1',
+            'option2' => 'Option #2',
+            'option3' => 'Option #3',
+            'option4' => 'Option #4',
+            'option5' => 'Option #5'
+        ];
     }
 
     /**
@@ -44,8 +54,18 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        
+        $question = Question::create($request->all());
+
+        foreach ($request->input() as $key => $value) {
+            if(strpos($key, 'option') !== false && $value != '') {
+                $status = $request->input('correct') == $key ? 1 : 0;
+                QuestionsOption::create([
+                    'question_id' => $question->id,
+                    'option'      => $value,
+                    'correct'     => $status
+                ]);
+            }
+        }
     }
 
     /**
@@ -71,7 +91,11 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $relations = [
+            'topics' => \App\Topic::get()->pluck('title', 'id')->prepend('Please select', ''),
+        ];
+
+        $question = Question::findOrFail($id);
     }
 
     /**
@@ -83,7 +107,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = Question::findOrFail($id);
+        $question->update($request->all());
     }
 
     /**
@@ -94,6 +119,7 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = Question::findOrFail($id);
+        $question->delete();
     }
 }
