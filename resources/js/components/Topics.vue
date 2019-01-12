@@ -21,15 +21,15 @@
             <table class="table table-hover">
               <tbody>
                 <tr>
-                  <th>ID</th>
                   <th>Topic</th>
                   <th>Created At</th>
+                  <th>Updated At</th>
                   <th>Modify</th>
                 </tr>
-                <tr v-for="topic in topics" :key="topic.id">
-                  <td>{{topic.id}}</td>
+                <tr v-for="topic in getTopic" :key="topic.id">
                   <td>{{topic.title}}</td>
                   <td>{{topic.created_at | myDate}}</td>
+                  <td>{{topic.updated_at | myDate}}</td>
                   <td>
                     <button type="button" class="btn btn-primary btn-sm" @click="editModal(topic)">
                       <i class="fa fa-edit"></i>
@@ -55,7 +55,8 @@
     <div v-if="!$gate.isAdmin()">
       <not-found></not-found>
     </div>
-    <!-- Modal -->
+
+    <!-- Modal tambah topic -->
     <div
       class="modal fade"
       id="addNew"
@@ -111,10 +112,18 @@ export default {
       })
     };
   },
+  mounted() {
+    this.$store.dispatch("allTopic");
+  },
+  computed: {
+    getTopic() {
+      return this.$store.getters.getTopic;
+    }
+  },
   methods: {
     loadTopic() {
       if (this.$gate.isAdmin()) {
-        axios.get("api/topic").then(({ data }) => (this.topics = data));
+        this.$store.dispatch("allTopic");
       }
     },
     createTopics() {
@@ -163,6 +172,11 @@ export default {
       this.form.reset();
       $("#addNew").modal("show");
       this.form.fill(topic);
+    },
+    newModalQuestion() {
+      //this.editmode = false;
+      //this.form.reset();
+      $("#addNewQuestion").modal("show");
     },
     deleteTopic(id) {
       swal({

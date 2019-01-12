@@ -9,6 +9,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+//support vuex
+import Vuex from 'vuex'
+Vue.use(Vuex)
+import storeData from "./store/index"
+const store = new Vuex.Store(
+    storeData
+)
+
 //Using VForm library
 import { Form, HasError, AlertError } from 'vform';
 window.Form = Form;
@@ -55,7 +63,9 @@ let routes = [
     { path: '/profile', component: require('./components/Profile.vue') },
     { path: '/users', component: require('./components/Users.vue') },
     { path: '/topic', component: require('./components/Topics.vue') },
-    { path: '/question', component: require('./components/Questions.vue') }
+    { path: '/option', component: require('./components/Question/ListQuestion.vue') },
+    { path: '/add_question', component: require('./components/Question/AddNewQuestion.vue') },
+    { path: '/edit_question', component: require('./components/Question/EditQuestion.vue') }
     //{ path: '*', component: require('./components/NotFound.vue') }
 ]
 
@@ -121,5 +131,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store,
 });

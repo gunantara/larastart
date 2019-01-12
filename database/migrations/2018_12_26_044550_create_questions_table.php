@@ -17,6 +17,11 @@ class CreateQuestionsTable extends Migration {
 			$table->increments('id');
 			$table->integer('topic_id')->unsigned()->nullable()->index('fk_256_topic_topic_id_question');
 			$table->text('question_text', 65535)->nullable();
+			$table->string('a');
+            $table->string('b');
+            $table->string('c');
+            $table->string('d');
+            $table->string('answer');
 			$table->text('code_snippet', 65535)->nullable();
 			$table->text('answer_explanation', 65535)->nullable();
 			$table->string('more_info_link', 191)->nullable();

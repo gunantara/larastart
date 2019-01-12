@@ -4,9 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Topic;
 use App\Question;
-use App\QuestionsOption;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
@@ -23,7 +23,17 @@ class QuestionController extends Controller
 
     public function index()
     {
-        return $questions = Question::all();
+        $this->authorize('isAdmin');
+        $questions = DB::table('topics')
+            ->rightjoin('questions', 'topics.id', '=', 'questions.topic_id')
+            ->select('topics.title', 'questions.*')
+            ->where('topics.deleted_at', NULL )
+            ->where('questions.deleted_at', NULL)
+            ->orderby('topics.title')
+            ->get();
+        return response()->json([
+                'questions'=>$questions
+            ],200);
     }
 
     /**
@@ -33,17 +43,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $relations = [
-            'topics' => \App\Topic::get()->pluck('title', 'id')->prepend('Please select', ''),
-        ];
-
-        $correct_options = [
-            'option1' => 'Option #1',
-            'option2' => 'Option #2',
-            'option3' => 'Option #3',
-            'option4' => 'Option #4',
-            'option5' => 'Option #5'
-        ];
+        //
     }
 
     /**
@@ -54,20 +54,18 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $question = Question::create($request->all());
+        return Question::create([
+            'topic_id' => $request['topic_id'],
+            'question_text' => $request['question_text'],
+            'a' => $request['a'],
+            'b' => $request['b'],
+            'c' => $request['c'],
+            'd' => $request['d'],
+            'answer' => $request['answer']
+        ]);
 
-        foreach ($request->input() as $key => $value) {
-            if(strpos($key, 'option') !== false && $value != '') {
-                $status = $request->input('correct') == $key ? 1 : 0;
-                QuestionsOption::create([
-                    'question_id' => $question->id,
-                    'option'      => $value,
-                    'correct'     => $status
-                ]);
-            }
-        }
+        //return ['message' => 'question created'];
     }
-
     /**
      * Display the specified resource.
      *
@@ -76,11 +74,7 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $relations = [
-            'topics' => \App\Topic::get()->pluck('title', 'id')->prepend('Please select', ''),
-        ];
-
-        return $question = Question::findOrFail($id);
+    //
     }
 
     /**
@@ -91,11 +85,7 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        $relations = [
-            'topics' => \App\Topic::get()->pluck('title', 'id')->prepend('Please select', ''),
-        ];
-
-        $question = Question::findOrFail($id);
+    
     }
 
     /**
@@ -107,8 +97,7 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $question = Question::findOrFail($id);
-        $question->update($request->all());
+    
     }
 
     /**
@@ -119,7 +108,10 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        $question = Question::findOrFail($id);
+        $question = Question::FindOrFail($id);
+        //delete the question
         $question->delete();
+        //the message log
+        return ['message' => 'Question deleted'];
     }
 }

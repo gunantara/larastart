@@ -1,7 +1,8 @@
 <?php
 namespace App;
-
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -16,34 +17,28 @@ use Illuminate\Database\Eloquent\Model;
 */
 class Question extends Model
 {
-    use SoftDeletes;
+    use HasApiTokens, Notifiable, SoftDeletes;
 
-    protected $fillable = ['question_text', 'code_snippet', 'answer_explanation', 'more_info_link', 'topic_id'];
+    protected $fillable = [
+        'topic_id','question_text','a','b','c','d','answer'
+    ];
 
     public static function boot()
     {
         parent::boot();
 
-        Question::observe(new \App\Observers\UserActionsObserver);
+        //Question::observe(new \App\Observers\UserActionsObserver);
     }
 
     /**
      * Set to null if empty
      * @param $input
      */
-    public function setTopicIdAttribute($input)
-    {
-        $this->attributes['topic_id'] = $input ? $input : null;
-    }
+    
 
     public function topic()
     {
         return $this->belongsTo(Topic::class, 'topic_id')->withTrashed();
-    }
-
-    public function options()
-    {
-        return $this->hasMany(QuestionsOption::class, 'question_id')->withTrashed();
     }
 }
 

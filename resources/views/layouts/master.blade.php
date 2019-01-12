@@ -69,7 +69,7 @@
           <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt blue"></i>
+              <i class="nav-icon fas fa-tachometer-alt "></i>
               <p>
                 Dashboard
               </p>
@@ -111,7 +111,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <router-link to="/question" class="nav-link">
+                <router-link to="/option" class="nav-link">
                   <i class="fab fa-pied-piper-hat"></i>
                   <p>Question</p>
                 </router-link>

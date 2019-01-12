@@ -16,13 +16,10 @@ class Topic extends Model
     public static function boot()
     {
         parent::boot();
-
-        Topic::observe(new \App\Observers\UserActionsObserver);
     }
 
     public function questions()
     {
         return $this->hasMany(Question::class, 'topic_id')->withTrashed();
     }
-
 }

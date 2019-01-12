@@ -23,11 +23,12 @@ class TopicController extends Controller
     public function index()
     {
         $this->authorize('isAdmin');
-
-        //return all data in table topics
-        return $topics = Topic::all();
+        $topics = Topic::all();
+        return response()->json([
+            'topics'=>$topics
+        ],200);
+        
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -53,6 +54,7 @@ class TopicController extends Controller
         return Topic::create([
             'title' => $request['title'],
         ]);
+        
         return ['message' => 'topic created'];
     }
 
