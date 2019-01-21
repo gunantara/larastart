@@ -12,7 +12,7 @@
             <div class="card-tools">
               <router-link to="/add_question">
                 <button class="btn btn-success">
-                  <i class="fab fa-pied-piper"></i>
+                  <i class="fas fa-scroll"></i>
                   Add New
                 </button>
               </router-link>
@@ -41,7 +41,7 @@
                   <td>{{question.d}}</td>
                   <td>{{question.answer}}</td>
                   <td>
-                    <router-link to="/option/edit">
+                    <router-link to="/edit_question">
                       <button type="button" class="btn btn-primary btn-sm">
                         <i class="fa fa-edit"></i>
                       </button>

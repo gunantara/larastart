@@ -1,44 +1,22 @@
 <template>
   <div class="container">
     <div class="container-fluid">
-      <div class="row mt-5">
-        <!-- ./col -->
-        <div class="col-lg-4 col-6">
-          <!-- small box -->
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h3>
-                53
-                <sup style="font-size: 20px">%</sup>
-              </h3>
-
-              <p>Bounce Rate</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">
-              More info
-              <i class="fa fa-arrow-circle-right"></i>
-            </a>
-          </div>
-        </div>
+      <div class="row mt-5" v-if="$gate.isAdmin()">
         <!-- ./col -->
         <div class="col-lg-4 col-6">
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
-
+              <h3>{{getJumlahUser}}</h3>
               <p>User Registrations</p>
             </div>
             <div class="icon">
-              <i class="ion ion-person-add"></i>
+              <i class="fa fa-user-plus"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <router-link to="/users" class="small-box-footer">
               More info
               <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            </router-link>
           </div>
         </div>
         <!-- ./col -->
@@ -46,21 +24,41 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>65</h3>
+              <h3>{{getJumlahTopics}}</h3>
 
-              <p>Unique Visitors</p>
+              <p>Topics Created</p>
             </div>
             <div class="icon">
-              <i class="ion ion-pie-graph"></i>
+              <i class="fas fa-scroll"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <router-link to="/topic" class="small-box-footer">
               More info
               <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            </router-link>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-4 col-6">
+          <!-- small box -->
+          <div class="small-box bg-success">
+            <div class="inner">
+              <h3>{{getJumlahQuestions}}</h3>
+              <p>Questions Created</p>
+            </div>
+            <div class="icon">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <router-link to="/option" class="small-box-footer">
+              More info
+              <i class="fa fa-arrow-circle-right"></i>
+            </router-link>
           </div>
         </div>
         <!-- ./col -->
       </div>
+    </div>
+    <div v-if="!$gate.isAdmin()">
+      <not-found></not-found>
     </div>
   </div>
 </template>
@@ -68,7 +66,47 @@
 <script>
 export default {
   mounted() {
-    console.log("Component mounted.");
+    this.$store.dispatch("AllJumlah_Users");
+    this.$store.dispatch("AllJumlah_Topics");
+    this.$store.dispatch("AllJumlah_Questions");
+  },
+  methods: {
+    loadJumlahUsers() {
+      if (this.$gate.isAdmin()) {
+        this.$store.dispatch("AllJumlah_Users");
+      }
+    },
+    loadJumlahTopics() {
+      if (this.$gate.isAdmin()) {
+        this.$store.dispatch("AllJumlah_Topics");
+      }
+    },
+    loadJumlahQuestions() {
+      if (this.$gate.isAdmin()) {
+        this.$store.dispatch("AllJumlah_Questions");
+      }
+    }
+  },
+  computed: {
+    getJumlahUser() {
+      return this.$store.getters.getJumlahUser;
+    },
+    getJumlahTopics() {
+      return this.$store.getters.getJumlahTopics;
+    },
+    getJumlahQuestions() {
+      return this.$store.getters.getJumlahQuestion;
+    }
+  },
+  created() {
+    this.loadJumlahUsers();
+    this.loadJumlahQuestions();
+    this.loadJumlahQuestions();
+    Fire.$on("AfterCreated", () => {
+      this.loadJumlahUsers();
+      this.loadJumlahTopics();
+      this.loadJumlahQuestions();
+    });
   }
 };
 </script>

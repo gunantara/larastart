@@ -26,12 +26,10 @@ class UserController extends Controller
     public function index()
     {
         $this->authorize('isAdmin');
-        
         //Filtering for user type
         return User::where('type', 'user')->get();
         //return User::latest()->paginate(10); 
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -40,6 +38,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        
+
         $this->validate($request,[
             'name' => 'required|string|max:191|unique:users',
             'email' => 'required|string|email|max:191|unique:users',

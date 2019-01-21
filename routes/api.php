@@ -26,3 +26,8 @@ Route::apiResource('question', 'API\QuestionController');
 //api for user profile
 Route::get('profile','API\UserController@profile');
 Route::put('profile','API\UserController@UpdateProfile');
+
+//api for dashboard admin
+Route::get('banyak_users','API\dashboard_controller@banyak_User');
+Route::get('banyak_question','API\dashboard_controller@banyak_question');
+Route::get('banyak_topics','API\dashboard_controller@banyak_topik');

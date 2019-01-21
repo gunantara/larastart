@@ -27,7 +27,7 @@
                       :value="topics.id"
                       v-for="topics in getTopic"
                       :key="topics.id"
-                    >{{topics.title}}</option>
+                    >ID Topic {{topics.id}} --> {{topics.title}}</option>
                   </select>
                   <has-error :form="form" field="topic_id"></has-error>
                 </div>

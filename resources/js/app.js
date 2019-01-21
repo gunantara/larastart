@@ -65,8 +65,8 @@ let routes = [
     { path: '/topic', component: require('./components/Topics.vue') },
     { path: '/option', component: require('./components/Question/ListQuestion.vue') },
     { path: '/add_question', component: require('./components/Question/AddNewQuestion.vue') },
-    { path: '/edit_question', component: require('./components/Question/EditQuestion.vue') }
-    //{ path: '*', component: require('./components/NotFound.vue') }
+    { path: '/edit_question', component: require('./components/Question/EditQuestion.vue') },
+    { path: '*', component: require('./components/NotFound.vue') }
 ]
 
 //route any path in web with history in laravel
