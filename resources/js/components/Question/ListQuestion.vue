@@ -8,7 +8,6 @@
               <i class="fab fa-pied-piper"></i>
               Question Data
             </h3>
-
             <div class="card-tools">
               <router-link to="/add_question">
                 <button class="btn btn-success">
@@ -41,7 +40,7 @@
                   <td>{{question.d}}</td>
                   <td>{{question.answer}}</td>
                   <td>
-                    <router-link to="/edit_question">
+                    <router-link :to="`edit-question${question.id}`">
                       <button type="button" class="btn btn-primary btn-sm">
                         <i class="fa fa-edit"></i>
                       </button>
@@ -67,6 +66,7 @@
       <not-found></not-found>
     </div>
     <!-- Modal -->
+    <!-- page-content" -->
   </div>
 </template>
 

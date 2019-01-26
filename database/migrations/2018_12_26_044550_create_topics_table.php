@@ -16,6 +16,7 @@ class CreateTopicsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('title', 191)->nullable();
+			$table->integer('per_q_mark');
 			$table->timestamps();
 			$table->softDeletes()->index();
 		});

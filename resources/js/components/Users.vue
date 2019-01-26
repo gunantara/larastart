@@ -26,11 +26,11 @@
                   <th>Email</th>
                   <th>Type</th>
                   <th>Register at</th>
-                  <th>Modify</th>
+                  <th>Action</th>
                 </tr>
                 <tr v-for="user in users" :key="user.id">
                   <td>{{user.id}}</td>
-                  <td>{{user.name}}</td>
+                  <td>{{user.name | Uptext}}</td>
                   <td>{{user.email}}</td>
                   <td>{{user.type | Uptext}}</td>
                   <td>{{user.created_at | myDate}}</td>

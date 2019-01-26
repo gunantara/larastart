@@ -10,7 +10,7 @@ class Topic extends Model
 {
     use HasApiTokens, Notifiable, SoftDeletes;
 
-    protected $fillable = ['title'];
+    protected $fillable = ['title','per_q_mark'];
 
 
     public static function boot()

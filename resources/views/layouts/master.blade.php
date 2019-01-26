@@ -42,11 +42,11 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <div class="brand-link">
       <img src="./img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
         style="opacity: .8">
       <span class="brand-text font-weight-light">SKKNI</span>
-    </a>
+    </div>
 
     <!-- Sidebar -->
     <div class="sidebar">
@@ -67,7 +67,18 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
-          @can('isAdmin')
+          @can('isUser')
+          <li class="nav-item">
+            <router-link to="/quiz" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt "></i>
+            <p>
+              Take Quiz
+            </p>
+          </router-link> 
+        </li>
+        @endcan
+
+        @can('isAdmin')
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt "></i>
@@ -174,10 +185,10 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      Anything you want
+      Kominfo Yogyakarta
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2018 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2019 <a href="https://bpsdmp.com">BPSDMP Yogyakarta</a>.</strong> All rights reserved.
   </footer>
 </div>
 <!-- ./wrapper -->

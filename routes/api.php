@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('user', 'API\UserController');
 Route::apiResource('topic', 'API\TopicController');
 Route::apiResource('question', 'API\QuestionController');
+Route::get('/edit-question/{id}','API\QuestionController@edit_question');
 
 //api for user profile
 Route::get('profile','API\UserController@profile');
@@ -31,3 +32,7 @@ Route::put('profile','API\UserController@UpdateProfile');
 Route::get('banyak_users','API\dashboard_controller@banyak_User');
 Route::get('banyak_question','API\dashboard_controller@banyak_question');
 Route::get('banyak_topics','API\dashboard_controller@banyak_topik');
+
+//api for take Quiz
+Route::apiResource('take_quiz','API\AttemptQuiz');
+Route::get('attempt_quiz/{id}','API\AttemptQuiz@attempt_quiz');

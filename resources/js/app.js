@@ -30,6 +30,7 @@ Vue.prototype.$gate = new Gate(window.user);
 //importing vue Router globally for webroute
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+import { routes } from './routes';
 
 //importing moment.js
 import moment from 'moment';
@@ -56,7 +57,7 @@ const toast = swal.mixin({
 window.toast = toast;
 
 //adding vue component
-let routes = [
+/*let routes = [
     { path: '/home', component: require('./components/Dashboard.vue') },
     { path: '/dashboard', component: require('./components/Dashboard.vue') },
     { path: '/developer', component: require('./components/Developer.vue') },
@@ -65,9 +66,11 @@ let routes = [
     { path: '/topic', component: require('./components/Topics.vue') },
     { path: '/option', component: require('./components/Question/ListQuestion.vue') },
     { path: '/add_question', component: require('./components/Question/AddNewQuestion.vue') },
-    { path: '/edit_question', component: require('./components/Question/EditQuestion.vue') },
-    { path: '*', component: require('./components/NotFound.vue') }
-]
+    { path: '/edit-question/:questionid', component: require('./components/Question/EditQuestion.vue') },
+    { path: '*', component: require('./components/NotFound.vue') },
+    { path: '/quiz', component: require('./components/Quiz/ListQuiz.vue') },
+    { path: '/attemptquiz', component: require('./components/Quiz/TakeQuiz.vue') }
+]*/
 
 //route any path in web with history in laravel
 const router = new VueRouter({

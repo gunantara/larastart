@@ -2,33 +2,35 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
+use App\Result;
+use App\Question;
+use App\Topic;
 use Illuminate\Support\Facades\DB;
 
-class TopicController extends Controller
+class AttemptQuiz extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function __construct()
     {
         $this->middleware('auth:api');
     } 
-
+    
     public function index()
     {
-        $this->authorize('isAdmin');
+        //$this->authorize('isUser');
         $topics = Topic::all();
         return response()->json([
-            'topics'=>$topics
-        ],200);
-        
+            'quiz'=>$topics
+        ],200); 
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -47,16 +49,8 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'title' => 'required|string|max:191|unique:topics',
-        ]);
-
-        return Topic::create([
-            'title' => $request['title'],
-            'per_q_mark' => $request['per_q_mark']
-        ]);
-        
-        return ['message' => 'topic created'];
+        $input = $request->all();
+        Result::create($input);
     }
 
     /**
@@ -67,9 +61,24 @@ class TopicController extends Controller
      */
     public function show($id)
     {
-        //
+        //$this->authorize('isUser');
+        
     }
 
+    public function attempt_quiz($id){
+
+        $quiz = DB::table('topics')
+            ->join('questions', 'topics.id', '=', 'questions.topic_id')
+            ->select('topics.title','topics.per_q_mark', 'questions.*')
+            ->where('topics.deleted_at', NULL )
+            ->where('questions.deleted_at', NULL)
+            ->where('topics.id', '=', $id)
+            ->orderby('topics.title')
+            ->get();
+        return response()->json([
+                'quiz'=>$quiz
+            ],200);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -90,13 +99,7 @@ class TopicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $topic = Topic::FindOrFail($id);
-
-        $this->validate($request,[
-            'title' => 'required|string|max:191|unique:topics,title,'.$topic->id,
-        ]);
-        $topic->update($request->all());
-        return ['message' => 'topic updated'];
+        //
     }
 
     /**
@@ -107,11 +110,6 @@ class TopicController extends Controller
      */
     public function destroy($id)
     {
-        $topic = Topic::FindOrFail($id);
-
-        //delete the user
-        $topic->delete();
-        //the message log
-        return ['message' => 'topic deleted'];
+        //
     }
 }

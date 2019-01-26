@@ -4,7 +4,8 @@ export default {
         questions: [],
         jumlah_users: [],
         jumlah_questions: [],
-        jumlah_topics: []
+        jumlah_topics: [],
+        quiz: []
     },
     getters: {
         getTopic(state) {
@@ -21,6 +22,9 @@ export default {
         },
         getJumlahTopics(state) {
             return state.jumlah_topics
+        },
+        getListQuiz(state) {
+            return state.quiz
         }
     },
     actions: {
@@ -48,6 +52,11 @@ export default {
             axios.get("api/banyak_topics").then((response) => {
                 context.commit('jumlah_topics', response.data.jumlah_topics)
             })
+        },
+        AllQuizzes(context) {
+            axios.get("api/take_quiz").then((response) => {
+                context.commit('quiz', response.data.quiz)
+            })
         }
     },
     mutations: {
@@ -65,6 +74,9 @@ export default {
         },
         jumlah_topics(state, data) {
             return state.jumlah_topics = data
+        },
+        quiz(state, data) {
+            return state.quiz = data
         }
 
     }

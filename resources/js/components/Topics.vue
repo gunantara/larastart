@@ -22,12 +22,14 @@
               <tbody>
                 <tr>
                   <th>Topic</th>
+                  <th>Per Question Mark</th>
                   <th>Created At</th>
                   <th>Updated At</th>
                   <th>Modify</th>
                 </tr>
                 <tr v-for="topic in getTopic" :key="topic.id">
                   <td>{{topic.title}}</td>
+                  <td>{{topic.per_q_mark}}</td>
                   <td>{{topic.created_at | myDate}}</td>
                   <td>{{topic.updated_at | myDate}}</td>
                   <td>
@@ -87,6 +89,17 @@
                 >
                 <has-error :form="form" field="title"></has-error>
               </div>
+              <div class="form-group">
+                <input
+                  v-model="form.per_q_mark"
+                  type="number"
+                  name="per_q_mark"
+                  placeholder="Value for each Question"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('per_q_mark') }"
+                >
+                <has-error :form="form" field="per_q_mark"></has-error>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -108,7 +121,8 @@ export default {
       topics: {},
       form: new Form({
         id: "",
-        title: ""
+        title: "",
+        per_q_mark: ""
       })
     };
   },

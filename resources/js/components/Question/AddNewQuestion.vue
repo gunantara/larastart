@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="container-fluid">
-      <div class="row mt-5" v-if="$gate.isAdmin()">
+      <div class="row mt-2" v-if="$gate.isAdmin()">
         <div class="col md-12">
           <!-- general form elements -->
           <div class="card card-primary">

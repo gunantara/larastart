@@ -71,18 +71,10 @@ export default {
     this.$store.dispatch("AllJumlah_Questions");
   },
   methods: {
-    loadJumlahUsers() {
+    loadJumlah() {
       if (this.$gate.isAdmin()) {
         this.$store.dispatch("AllJumlah_Users");
-      }
-    },
-    loadJumlahTopics() {
-      if (this.$gate.isAdmin()) {
         this.$store.dispatch("AllJumlah_Topics");
-      }
-    },
-    loadJumlahQuestions() {
-      if (this.$gate.isAdmin()) {
         this.$store.dispatch("AllJumlah_Questions");
       }
     }
@@ -99,13 +91,9 @@ export default {
     }
   },
   created() {
-    this.loadJumlahUsers();
-    this.loadJumlahQuestions();
-    this.loadJumlahQuestions();
+    this.loadJumlah();
     Fire.$on("AfterCreated", () => {
-      this.loadJumlahUsers();
-      this.loadJumlahTopics();
-      this.loadJumlahQuestions();
+      this.loadJumlah();
     });
   }
 };

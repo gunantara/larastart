@@ -26,7 +26,7 @@ class QuestionController extends Controller
         $this->authorize('isAdmin');
         $questions = DB::table('topics')
             ->rightjoin('questions', 'topics.id', '=', 'questions.topic_id')
-            ->select('topics.title', 'questions.*')
+            ->select('topics.id','topics.title', 'questions.*')
             ->where('topics.deleted_at', NULL )
             ->where('questions.deleted_at', NULL)
             ->orderby('topics.title')
@@ -52,6 +52,13 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function edit_question($id){
+        $question = Question::find($id);
+        return response()->json([
+            'question'=>$question
+        ],200);
+    }
+
     public function store(Request $request)
     {
         return Question::create([
@@ -97,7 +104,8 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-    
+        $question = Question::FindOrFail($id); 
+        $question->update($request->all());
     }
 
     /**
